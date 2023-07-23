@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: reports
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+  datasource:
+    url: jdbc:tc:postgresql:12.9-alpine:///patient-reports
+    username: reports
+    password: reports
+    driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
