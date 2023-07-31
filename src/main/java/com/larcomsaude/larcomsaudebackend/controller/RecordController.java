@@ -7,30 +7,38 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping(value = {"/records"}, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = {"/records"}, produces = MediaType.APPLICATION_JSON_VALUE)
 @Slf4j
 @Validated
 @AllArgsConstructor
-public class RecordController {
+@ControllerAdvice
+public class RecordController extends ResponseEntityExceptionHandler {
 
 	private final RecordService recordService;
 
-	@GetMapping("{clientId}")
-	@ResponseStatus(HttpStatus.OK)
-	public RecordResponse getByIccid(@PathVariable final String clientId) {
-		return recordService.getRecords(clientId);
+	@GetMapping("/{clientId}")
+	public ResponseEntity<RecordResponse> getByClientId(@PathVariable final String clientId) {
+		return ResponseEntity.ok(recordService.getRecords(clientId));
 	}
 
-	@PostMapping
+	@PostMapping()
 	@ResponseStatus(HttpStatus.CREATED)
-	public void createRecord(@Valid @RequestBody final RecordRequest recordRequest) {
-		 recordService.saveRecord(recordRequest);
+	public ResponseEntity<String> createRecord(@Valid @RequestBody final RecordRequest recordRequest) {
+		return ResponseEntity.ok(recordService.saveRecord(recordRequest).toString());
+	}
+
+	@ExceptionHandler(ResponseStatusException.class)
+	public ResponseEntity<String> handleResponseStatusException(ResponseStatusException ex) {
+		return ResponseEntity.status(ex.getStatusCode()).body(ex.getReason());
 	}
 
 }

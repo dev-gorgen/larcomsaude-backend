@@ -19,5 +19,5 @@ CREATE TABLE IF NOT EXISTS document
     record_id  BIGSERIAL,
     file_name  varchar(100) NOT NULL,
     file_description varchar(200),
-    file_url varchar(200) NOT NULL
+    file_url varchar(200)
 );

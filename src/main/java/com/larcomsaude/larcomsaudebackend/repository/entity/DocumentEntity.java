@@ -13,12 +13,13 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
+@Builder
 public class DocumentEntity {
 
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@EqualsAndHashCode.Exclude	private long id;
+	@EqualsAndHashCode.Exclude	private Long id;
 
 	@EqualsAndHashCode.Exclude
 	private UUID uuid;
@@ -40,7 +41,7 @@ public class DocumentEntity {
 	@Column(name = "file_description")
 	private String description;
 
-	@Column(name = "file_url")
-	private String url;
+	@Column(columnDefinition = "BYTEA")
+	private byte[] fileData;
 
 }

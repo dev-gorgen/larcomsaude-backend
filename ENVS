@@ -1,0 +1,4 @@
+export SPRING_DATASOURCE_URL=jdbc:postgresql://localhost/patient-reports
+export SPRING_DATASOURCE_PASSWORD=reports123
+export SPRING_DATASOURCE_USERNAME=reports
+

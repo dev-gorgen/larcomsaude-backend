@@ -32,6 +32,7 @@ class RecordServiceImplTest {
 				.build();
 		recordService.saveRecord(recordRequest);
 
+
 		Assertions.assertNotNull(recordService.getRecords("client_id_test"));
 
 	}

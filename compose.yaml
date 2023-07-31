@@ -1,9 +1,12 @@
 services:
+
   postgres:
     image: 'postgres:latest'
+    restart: always
     environment:
       - 'POSTGRES_DB=patient-reports'
-      - 'POSTGRES_PASSWORD=reports'
       - 'POSTGRES_USER=reports'
+      - 'POSTGRES_PASSWORD=reports123'
     ports:
       - '5432:5432'
+

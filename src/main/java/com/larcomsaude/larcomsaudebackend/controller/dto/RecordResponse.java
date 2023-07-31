@@ -6,6 +6,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.extern.jackson.Jacksonized;
 
+import java.util.List;
+
 @AllArgsConstructor
 @Builder
 @Getter
@@ -16,6 +18,8 @@ public class RecordResponse {
 	private String name;
 
 	private String description;
+
+	private List<DocumentResponse> documentResponseList;
 
 
 }

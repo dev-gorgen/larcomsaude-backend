@@ -6,6 +6,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.extern.jackson.Jacksonized;
 
+import javax.validation.constraints.NotNull;
+
 @AllArgsConstructor
 @Builder
 @Getter
@@ -13,7 +15,11 @@ import lombok.extern.jackson.Jacksonized;
 @Jacksonized
 public class RecordRequest {
 
+	@NotNull
 	private String name;
+
 	private String description;
+
+	@NotNull
 	private String clientId;
 }
